@@ -53,17 +53,17 @@ nav.sc .nlogo{opacity:1;transform:translateY(0);}
 .mcls{position:absolute;top:1.5rem;right:2rem;font-size:1.5rem;color:rgba(253,246,240,.45);background:none;border:none;cursor:pointer;}
 
 /* HERO */
-#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden;}
-.hero-bg{position:absolute;inset:0;z-index:0;}
-.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0;animation:heroBgReveal 1.8s 0.2s ease forwards;}
-@keyframes heroBgReveal{to{opacity:.12;}}
-.hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 90% 70% at 50% 30%,rgba(192,57,90,.35) 0%,transparent 65%),radial-gradient(ellipse 60% 50% at 20% 80%,rgba(26,122,114,.25) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 80% 70%,rgba(212,168,75,.18) 0%,transparent 55%),rgba(13,6,8,.72);}
-.hrings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:1;}
-.petal{position:absolute;animation:fp linear infinite;opacity:0;pointer-events:none;bottom:-60px;z-index:1;}
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden;background:radial-gradient(ellipse 90% 70% at 50% 30%,rgba(192,57,90,.18) 0%,transparent 65%),radial-gradient(ellipse 60% 50% at 20% 80%,rgba(26,122,114,.12) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 80% 70%,rgba(212,168,75,.08) 0%,transparent 55%),var(--bg-deep);}
+.hrings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(192,57,90,.1);transform:translate(-50%,-50%);animation:rp 6s ease-in-out infinite;}
+.ring:nth-child(1){width:300px;height:300px;}
+.ring:nth-child(2){width:520px;height:520px;animation-delay:1.2s;border-color:rgba(212,168,75,.07);}
+.ring:nth-child(3){width:740px;height:740px;animation-delay:2.4s;border-color:rgba(26,122,114,.06);}
+.ring:nth-child(4){width:960px;height:960px;animation-delay:3.6s;border-color:rgba(192,57,90,.04);}
 @keyframes rp{0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.04);}}
+.petal{position:absolute;animation:fp linear infinite;opacity:0;pointer-events:none;bottom:-60px;}
 @keyframes fp{0%{opacity:0;transform:translateY(0) rotate(0deg);}10%{opacity:.7;}90%{opacity:.2;}100%{opacity:0;transform:translateY(-110vh) rotate(720deg);}}
-#hero>*:not(.hero-bg):not(.hrings):not(.petal){position:relative;z-index:2;}
-.hbadge{display:inline-block;background:rgba(192,57,90,.1);border:1px solid rgba(192,57,90,.3);border-radius:var(--r-xl);padding:.4rem 1.4rem;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.45em;color:var(--rose-light);text-transform:uppercase;margin-bottom:2rem;opacity:0;animation:fu .9s .3s forwards;position:relative;z-index:2;}
+.hbadge{display:inline-block;background:rgba(192,57,90,.1);border:1px solid rgba(192,57,90,.3);border-radius:var(--r-xl);padding:.4rem 1.4rem;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.45em;color:var(--rose-light);text-transform:uppercase;margin-bottom:2rem;opacity:0;animation:fu .9s .3s forwards;}
 .omw{font-size:3.5rem;display:block;margin-bottom:1.5rem;opacity:0;animation:fu .9s .5s forwards,glow 3s 1.4s ease-in-out infinite;}
 @keyframes glow{0%,100%{filter:drop-shadow(0 0 18px rgba(212,168,75,.4));}50%{filter:drop-shadow(0 0 36px rgba(212,168,75,.8));}}
 .hnames{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(3.2rem,10vw,6.5rem);line-height:1;opacity:0;animation:fu 1.2s .7s forwards;}
@@ -197,82 +197,16 @@ section{position:relative;padding:6rem 2rem;overflow:hidden;}
 .mframe{flex:1;border:none;width:100%;min-height:340px;filter:grayscale(25%) contrast(1.1);}
 .movl{position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,rgba(192,57,90,.06),transparent 60%);border-radius:0;}
 
-/* GALLERY — ANIMATED */
-#gallery{background:var(--bg-deep);padding-bottom:7rem;}
-
-/* ── Cinematic Slideshow ── */
-.gslideshow{position:relative;width:100%;max-width:900px;margin:3rem auto 0;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7);aspect-ratio:16/9;background:var(--bg-mid);}
-.gslide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease,transform 1s ease;transform:scale(1.04);cursor:pointer;}
-.gslide.active{opacity:1;transform:scale(1);}
-.gslide.prev{opacity:0;transform:scale(.96);}
-.gslide img{width:100%;height:100%;object-fit:cover;display:block;}
-.gslide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,6,8,.85) 0%,rgba(13,6,8,.1) 50%,transparent 100%);}
-.gslide-caption{position:absolute;bottom:0;left:0;right:0;padding:2rem 2.5rem;transform:translateY(8px);opacity:0;transition:all .6s ease .3s;}
-.gslide.active .gslide-caption{transform:translateY(0);opacity:1;}
-.gslide-num{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.4em;color:var(--rose-light);text-transform:uppercase;margin-bottom:.4rem;display:block;}
-.gslide-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:var(--cream);font-style:italic;}
-
-/* slideshow controls */
-.gs-prev,.gs-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(13,6,8,.5);border:1px solid rgba(253,246,240,.12);color:var(--cream);width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;transition:all .3s;z-index:10;backdrop-filter:blur(8px);}
-.gs-prev{left:1.2rem;}
-.gs-next{right:1.2rem;}
-.gs-prev:hover,.gs-next:hover{background:var(--rose);border-color:var(--rose);transform:translateY(-50%) scale(1.08);}
-.gs-dots{position:absolute;bottom:1.2rem;right:2.5rem;display:flex;gap:.5rem;z-index:10;}
-.gs-dot{width:6px;height:6px;border-radius:50%;background:rgba(253,246,240,.25);cursor:pointer;transition:all .3s;}
-.gs-dot.active{background:var(--rose-light);width:20px;border-radius:3px;}
-.gs-play{position:absolute;top:1.2rem;right:1.2rem;background:rgba(13,6,8,.5);border:1px solid rgba(253,246,240,.12);color:var(--cream);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8rem;transition:all .3s;z-index:10;backdrop-filter:blur(8px);}
-.gs-play:hover{background:var(--gold);border-color:var(--gold);}
-.gs-prog{position:absolute;bottom:0;left:0;height:3px;background:linear-gradient(90deg,var(--rose),var(--gold));width:0;transition:width linear;z-index:10;}
-
-/* ── Animated Thumbnail Strip ── */
-.gstrip{display:flex;gap:10px;margin-top:1.2rem;max-width:900px;margin-left:auto;margin-right:auto;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}
-.gstrip::-webkit-scrollbar{display:none;}
-.gthumb{flex-shrink:0;width:120px;height:75px;border-radius:var(--r-sm);overflow:hidden;cursor:pointer;border:2px solid transparent;transition:all .35s;opacity:.55;position:relative;}
-.gthumb img{width:100%;height:100%;object-fit:cover;transition:transform .35s;}
-.gthumb:hover{opacity:.85;transform:translateY(-3px);}
-.gthumb.active{border-color:var(--rose-light);opacity:1;transform:translateY(-5px);box-shadow:0 8px 24px rgba(192,57,90,.4);}
-.gthumb.active img{transform:scale(1.06);}
-
-/* ── Masonry Float Grid ── */
-.gmasonry{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(3,120px);gap:8px;margin-top:3rem;max-width:900px;margin-left:auto;margin-right:auto;}
-.gm1{grid-column:1/6;grid-row:1/3;}
-.gm2{grid-column:6/9;grid-row:1/2;}
-.gm3{grid-column:9/13;grid-row:1/2;}
-.gm4{grid-column:6/10;grid-row:2/4;}
-.gm5{grid-column:10/13;grid-row:2/4;}
-.gm1a{grid-column:1/4;grid-row:3/4;}
-.gm1b{grid-column:4/6;grid-row:3/4;}
-.gmcell{border-radius:var(--r-sm);overflow:hidden;cursor:pointer;position:relative;border:1px solid rgba(212,168,75,.12);transition:transform .4s,box-shadow .4s;}
-.gmcell img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease,filter .4s;}
-.gmcell-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(192,57,90,.35),rgba(26,122,114,.2));opacity:0;transition:opacity .4s;display:flex;align-items:center;justify-content:center;}
-.gmcell-overlay span{font-size:1.6rem;transform:scale(.7);transition:transform .4s;}
-.gmcell:hover{transform:scale(1.025);box-shadow:0 12px 40px rgba(0,0,0,.5);}
-.gmcell:hover img{transform:scale(1.08);filter:brightness(1.1);}
-.gmcell:hover .gmcell-overlay{opacity:1;}
-.gmcell:hover .gmcell-overlay span{transform:scale(1);}
-
-/* ── Gallery Section Label ── */
-.gcount-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(192,57,90,.1);border:1px solid rgba(192,57,90,.25);border-radius:var(--r-xl);padding:.35rem 1.2rem;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:var(--rose-light);text-transform:uppercase;margin-bottom:1rem;}
-
-/* ── Lightbox upgrade ── */
-.lightbox{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.97);align-items:center;justify-content:center;flex-direction:column;gap:1rem;}
-.lightbox.open{display:flex;}
-.lightbox img{max-width:90vw;max-height:80vh;border-radius:var(--r-md);box-shadow:0 0 80px rgba(192,57,90,.2),0 0 160px rgba(0,0,0,.9);animation:lbIn .35s ease;}
-@keyframes lbIn{from{opacity:0;transform:scale(.93);}to{opacity:1;transform:scale(1);}}
-.lbclose{position:absolute;top:1.5rem;right:2rem;font-size:2rem;color:rgba(255,255,255,.4);cursor:pointer;background:none;border:none;transition:color .3s;}
-.lbclose:hover{color:var(--rose-light);}
-.lbnav{display:flex;gap:1rem;}
-.lbnav button{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:var(--cream);padding:.5rem 1.5rem;border-radius:var(--r-sm);cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;transition:all .3s;}
-.lbnav button:hover{background:var(--rose);border-color:var(--rose);}
-.lb-counter{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(253,246,240,.3);text-transform:uppercase;}
-
-@media(max-width:768px){
-  .gslideshow{aspect-ratio:4/3;}
-  .gmasonry{grid-template-columns:1fr 1fr;grid-template-rows:auto;display:grid;}
-  .gm1,.gm2,.gm3,.gm4,.gm5,.gm1a,.gm1b{grid-column:auto;grid-row:auto;height:160px;}
-  .gstrip{gap:6px;}
-  .gthumb{width:90px;height:58px;}
-}
+/* GALLERY */
+#gallery{background:var(--bg-deep);}
+.ggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:3rem;max-width:800px;margin-left:auto;margin-right:auto;}
+.gcell{aspect-ratio:1;background:rgba(255,255,255,.03);border:1px solid rgba(212,168,75,.1);border-radius:var(--r-md);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;position:relative;overflow:hidden;transition:border-color .3s,transform .4s,box-shadow .4s;cursor:pointer;}
+.gcell:first-child{grid-row:span 2;aspect-ratio:auto;}
+.gcell::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(192,57,90,.1),rgba(26,122,114,.1));opacity:0;transition:opacity .3s;border-radius:inherit;}
+.gcell:hover{transform:scale(1.02);border-color:rgba(212,168,75,.4);box-shadow:0 8px 32px rgba(0,0,0,.3);}
+.gcell:hover::before{opacity:1;}
+.gci{font-size:2rem;opacity:.2;}
+.gcl{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;color:rgba(253,246,240,.2);text-transform:uppercase;}
 /* Lightbox */
 .lightbox{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.95);align-items:center;justify-content:center;flex-direction:column;gap:1rem;}
 .lightbox.open{display:flex;}
@@ -390,7 +324,6 @@ footer{background:var(--bg-deep);border-top:1px solid rgba(192,57,90,.12);text-a
   <img id="lbimg" src="" alt="Gallery Photo"/>
   <div class="lbnav">
     <button onclick="lbNav(-1)">← Prev</button>
-    <span class="lb-counter" id="lbCounter">1 / 5</span>
     <button onclick="lbNav(1)">Next →</button>
   </div>
 </div>
@@ -420,7 +353,6 @@ footer{background:var(--bg-deep);border-top:1px solid rgba(192,57,90,.12);text-a
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-bg"><img src="p1.jpeg" alt="" aria-hidden="true"/></div>
   <div class="hrings"><div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div></div>
   <div class="petal" style="left:8%;font-size:1rem;animation-duration:13s;animation-delay:0s;">🌸</div>
   <div class="petal" style="left:22%;font-size:.8rem;animation-duration:16s;animation-delay:3s;">🌺</div>
@@ -612,90 +544,14 @@ footer{background:var(--bg-deep);border-top:1px solid rgba(192,57,90,.12);text-a
     <p class="ey rv">Memories</p>
     <h2 class="st rv">Our <em>Photo Gallery</em></h2>
     <div class="gr rv"><div class="grg"></div></div>
-    <div class="gcount-badge rv">✦ 5 Photos · Pre-Wedding Shoot</div>
-
-    <!-- Cinematic Slideshow -->
-    <div class="gslideshow rv" id="gslideshow">
-      <div class="gslide active" data-idx="0" onclick="openLightbox(0)">
-        <img src="p1.jpeg" alt="Chinnarao & Pavani — Photo 1" onerror="this.parentElement.style.background='linear-gradient(135deg,rgba(192,57,90,.25),rgba(26,122,114,.2))'"/>
-        <div class="gslide-overlay"></div>
-        <div class="gslide-caption">
-          <span class="gslide-num">01 / 05</span>
-          <span class="gslide-title">Chinnarao &amp; Pavani — Pre-Wedding</span>
-        </div>
-      </div>
-      <div class="gslide" data-idx="1" onclick="openLightbox(1)">
-        <img src="p2.jpeg" alt="Chinnarao & Pavani — Photo 2" onerror="this.parentElement.style.background='linear-gradient(135deg,rgba(212,168,75,.2),rgba(192,57,90,.2))'"/>
-        <div class="gslide-overlay"></div>
-        <div class="gslide-caption">
-          <span class="gslide-num">02 / 05</span>
-          <span class="gslide-title">A Moment Together</span>
-        </div>
-      </div>
-      <div class="gslide" data-idx="2" onclick="openLightbox(2)">
-        <img src="p3.jpeg" alt="Chinnarao & Pavani — Photo 3" onerror="this.parentElement.style.background='linear-gradient(135deg,rgba(26,122,114,.2),rgba(212,168,75,.2))'"/>
-        <div class="gslide-overlay"></div>
-        <div class="gslide-caption">
-          <span class="gslide-num">03 / 05</span>
-          <span class="gslide-title">Love in Every Frame</span>
-        </div>
-      </div>
-      <div class="gslide" data-idx="3" onclick="openLightbox(3)">
-        <img src="p4.jpeg" alt="Chinnarao & Pavani — Photo 4" onerror="this.parentElement.style.background='linear-gradient(135deg,rgba(192,57,90,.2),rgba(212,168,75,.25))'"/>
-        <div class="gslide-overlay"></div>
-        <div class="gslide-caption">
-          <span class="gslide-num">04 / 05</span>
-          <span class="gslide-title">Eternal Promise</span>
-        </div>
-      </div>
-      <div class="gslide" data-idx="4" onclick="openLightbox(4)">
-        <img src="p5.jpeg" alt="Chinnarao & Pavani — Photo 5" onerror="this.parentElement.style.background='linear-gradient(135deg,rgba(26,122,114,.25),rgba(192,57,90,.2))'"/>
-        <div class="gslide-overlay"></div>
-        <div class="gslide-caption">
-          <span class="gslide-num">05 / 05</span>
-          <span class="gslide-title">Two Souls, One Journey</span>
-        </div>
-      </div>
-
-      <button class="gs-prev" onclick="gsPrev(event)">&#8592;</button>
-      <button class="gs-next" onclick="gsNext(event)">&#8594;</button>
-      <div class="gs-dots" id="gsDots"></div>
-      <button class="gs-play" id="gsPlay" onclick="gsTogglePlay(event)" title="Auto-play">▶</button>
-      <div class="gs-prog" id="gsProg"></div>
+    <div class="ggrid rv">
+      <div class="gcell" onclick="openLightbox(0)" title="Click to view"><span class="gci">📷</span><span class="gcl">Feature Photo</span></div>
+      <div class="gcell" onclick="openLightbox(1)" title="Click to view"><span class="gci">📷</span><span class="gcl">Add Photo</span></div>
+      <div class="gcell" onclick="openLightbox(2)" title="Click to view"><span class="gci">📷</span><span class="gcl">Add Photo</span></div>
+      <div class="gcell" onclick="openLightbox(3)" title="Click to view"><span class="gci">📷</span><span class="gcl">Add Photo</span></div>
+      <div class="gcell" onclick="openLightbox(4)" title="Click to view"><span class="gci">📷</span><span class="gcl">Add Photo</span></div>
     </div>
-
-    <!-- Thumbnail Strip -->
-    <div class="gstrip rv" id="gstrip">
-      <div class="gthumb active" onclick="gsGoTo(0)"><img src="p1.jpeg" alt="Thumb 1" onerror="this.style.background='rgba(192,57,90,.3)'"/></div>
-      <div class="gthumb" onclick="gsGoTo(1)"><img src="p2.jpeg" alt="Thumb 2" onerror="this.style.background='rgba(212,168,75,.3)'"/></div>
-      <div class="gthumb" onclick="gsGoTo(2)"><img src="p3.jpeg" alt="Thumb 3" onerror="this.style.background='rgba(26,122,114,.3)'"/></div>
-      <div class="gthumb" onclick="gsGoTo(3)"><img src="p4.jpeg" alt="Thumb 4" onerror="this.style.background='rgba(192,57,90,.25)'"/></div>
-      <div class="gthumb" onclick="gsGoTo(4)"><img src="p5.jpeg" alt="Thumb 5" onerror="this.style.background='rgba(212,168,75,.25)'"/></div>
-    </div>
-
-    <!-- Masonry Grid -->
-    <div class="gmasonry rv" id="gmasonry">
-      <div class="gmcell gm1" onclick="openLightbox(0)">
-        <img src="p1.jpeg" alt="Photo 1"/>
-        <div class="gmcell-overlay"><span>🔍</span></div>
-      </div>
-      <div class="gmcell gm2" onclick="openLightbox(1)">
-        <img src="p2.jpeg" alt="Photo 2"/>
-        <div class="gmcell-overlay"><span>🔍</span></div>
-      </div>
-      <div class="gmcell gm3" onclick="openLightbox(2)">
-        <img src="p3.jpeg" alt="Photo 3"/>
-        <div class="gmcell-overlay"><span>🔍</span></div>
-      </div>
-      <div class="gmcell gm4" onclick="openLightbox(3)">
-        <img src="p4.jpeg" alt="Photo 4"/>
-        <div class="gmcell-overlay"><span>🔍</span></div>
-      </div>
-      <div class="gmcell gm5" onclick="openLightbox(4)">
-        <img src="p5.jpeg" alt="Photo 5"/>
-        <div class="gmcell-overlay"><span>🔍</span></div>
-      </div>
-    </div>
+    <p style="margin-top:2rem;font-style:italic;font-size:1rem;color:rgba(253,246,240,.28);" class="rv">Photos will be added after the celebration 🌸</p>
   </div>
 </section>
 
@@ -943,107 +799,23 @@ function sendWish(){
   showToast('🌸 RSVP received! Thank you!');
 }
 
-// GALLERY SLIDESHOW ENGINE
-const galleryPhotos=['p1.jpeg','p2.jpeg','p3.jpeg','p4.jpeg','p5.jpeg'];
-let lbCurrent=0;
-let gsCurrent=0;
-let gsAutoPlay=true;
-let gsTimer=null;
-let gsProgTimer=null;
-const GS_DURATION=4000; // ms per slide
-
-// Build dots
-(function buildDots(){
-  const dotsEl=document.getElementById('gsDots');
-  galleryPhotos.forEach((_,i)=>{
-    const d=document.createElement('div');
-    d.className='gs-dot'+(i===0?' active':'');
-    d.onclick=(e)=>{e.stopPropagation();gsGoTo(i);};
-    dotsEl.appendChild(d);
-  });
-})();
-
-function gsUpdateUI(idx){
-  // slides
-  document.querySelectorAll('.gslide').forEach((s,i)=>{
-    s.classList.toggle('active',i===idx);
-    s.classList.toggle('prev',i===(idx-1+galleryPhotos.length)%galleryPhotos.length);
-  });
-  // dots
-  document.querySelectorAll('.gs-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
-  // thumbs
-  document.querySelectorAll('.gthumb').forEach((t,i)=>t.classList.toggle('active',i===idx));
-  // progress bar reset
-  const prog=document.getElementById('gsProg');
-  prog.style.transition='none';
-  prog.style.width='0%';
-  if(gsAutoPlay){
-    requestAnimationFrame(()=>{
-      requestAnimationFrame(()=>{
-        prog.style.transition=`width ${GS_DURATION}ms linear`;
-        prog.style.width='100%';
-      });
-    });
-  }
-}
-
-function gsGoTo(idx){
-  gsCurrent=(idx+galleryPhotos.length)%galleryPhotos.length;
-  gsUpdateUI(gsCurrent);
-  if(gsAutoPlay) gsResetTimer();
-}
-function gsNext(e){if(e)e.stopPropagation();gsGoTo(gsCurrent+1);}
-function gsPrev(e){if(e)e.stopPropagation();gsGoTo(gsCurrent-1);}
-
-function gsResetTimer(){
-  clearInterval(gsTimer);
-  if(gsAutoPlay){
-    gsTimer=setInterval(()=>gsGoTo(gsCurrent+1),GS_DURATION);
-  }
-}
-
-function gsTogglePlay(e){
-  if(e)e.stopPropagation();
-  gsAutoPlay=!gsAutoPlay;
-  document.getElementById('gsPlay').textContent=gsAutoPlay?'⏸':'▶';
-  const prog=document.getElementById('gsProg');
-  if(gsAutoPlay){
-    gsResetTimer();
-    prog.style.transition=`width ${GS_DURATION}ms linear`;
-    prog.style.width='100%';
-  }else{
-    clearInterval(gsTimer);
-    prog.style.transition='none';
-    prog.style.width='0%';
-  }
-}
-
-// Init autoplay
-gsUpdateUI(0);
-gsResetTimer();
-
 // LIGHTBOX
+const galleryPhotos=['p1.jpeg', 'p2.jpeg', 'p3.jpeg', 'p4.jpeg', 'p5.jpeg'];// Add photo URLs here: ['photo1.jpg','photo2.jpg',...]
+let lbCurrent=0;
 function openLightbox(idx){
+  if(galleryPhotos.length===0){showToast('📷 Photos coming soon after the celebration!');return;}
   lbCurrent=idx%galleryPhotos.length;
   document.getElementById('lbimg').src=galleryPhotos[lbCurrent];
-  document.getElementById('lbCounter').textContent=(lbCurrent+1)+' / '+galleryPhotos.length;
   document.getElementById('lightbox').classList.add('open');
 }
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
 function lbNav(dir){
+  if(galleryPhotos.length===0)return;
   lbCurrent=(lbCurrent+dir+galleryPhotos.length)%galleryPhotos.length;
-  const img=document.getElementById('lbimg');
-  img.style.animation='none';
-  requestAnimationFrame(()=>{img.style.animation='lbIn .35s ease';});
-  img.src=galleryPhotos[lbCurrent];
-  document.getElementById('lbCounter').textContent=(lbCurrent+1)+' / '+galleryPhotos.length;
+  document.getElementById('lbimg').src=galleryPhotos[lbCurrent];
 }
 document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLightbox();});
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape')closeLightbox();
-  if(e.key==='ArrowLeft')lbNav(-1);
-  if(e.key==='ArrowRight')lbNav(1);
-});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='ArrowRight')lbNav(1);});
 
 // MOBILE MENU
 function toggleMenu(){document.getElementById('mm').classList.toggle('open');}
